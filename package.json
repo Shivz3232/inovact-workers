@@ -1,0 +1,32 @@
+{
+  "name": "inovact-workers",
+  "version": "1.0.0",
+  "description": "Workers for Inovact Social",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shivz3232/inovact-workers.git"
+  },
+  "keywords": [
+    "inovact",
+    "social",
+    "workers"
+  ],
+  "author": "D G Shivu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shivz3232/inovact-workers/issues"
+  },
+  "homepage": "https://github.com/Shivz3232/inovact-workers#readme",
+  "dependencies": {
+    "aws-sdk": "^2.1589.0",
+    "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
+    "joi": "^17.12.2",
+    "node-cron": "^3.0.3",
+    "winston": "^3.13.0"
+  }
+}
