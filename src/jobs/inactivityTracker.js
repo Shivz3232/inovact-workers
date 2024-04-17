@@ -5,7 +5,7 @@ const {
 } = require("../workers/userActivity.worker/inactivityTracker/index");
 
 const userInactivityTrackerJob = cron.schedule(
-  "59 23 * * *",
+  "36 21 * * *",
   () => {
     logger.info("Running user inactivity tracker cron job...");
     userInactivityTracker();

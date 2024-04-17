@@ -31,6 +31,8 @@ const insertUserActivity = async (identifier, direction, userId, entityIds) => {
     });
   });
 
+  console.log(activityId, direction, userId, entityIds);
+
   return result;
 };
 
