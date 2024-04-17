@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:lts-alpine3.17-amd64
 
 RUN mkdir -p /usr/src/node-app && chown -R node:node /usr/src/node-app
 
@@ -12,4 +12,4 @@ RUN npm ci
 
 COPY --chown=node:node . .
 
-CMD yarn start
+CMD yarn start 
