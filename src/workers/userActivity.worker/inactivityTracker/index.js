@@ -1,5 +1,5 @@
-const { query: Hasura } = require("../../utils/hasura");
-const insertActivity = require("../../utils/insertUserActivity");
+const { query: Hasura } = require("../../../utils/hasura");
+const insertActivity = require("../../../utils/insertUserActivity/");
 const { getLastAppOpenedTimestamp } = require("./queries/queries");
 
 const userInactivityTracker = async () => {
