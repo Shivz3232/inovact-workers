@@ -1,1 +1,2 @@
 require("./inactivityTracker")
+require("./test")
