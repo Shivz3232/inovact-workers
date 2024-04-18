@@ -1,6 +1,7 @@
 const AWS = require('aws-sdk');
 
 const config = require('../../config/config');
+const { query: Hasura } = require('../hasura');
 const { getActivityIdQuery } = require('./queries/queries');
 
 const sqs = new AWS.SQS({
@@ -8,7 +9,8 @@ const sqs = new AWS.SQS({
 });
 
 const insertUserActivity = async (identifier, direction, userId, entityIds) => {
-  const activityId = await getActivityIdQuery(identifier);
+  const activityIdResponse = await Hasura(getActivityIdQuery, { identifier });
+  const activityId = activityIdResponse.result.data.activities[0].id;
 
   const result = await new Promise((resolve, reject) => {
     const params = {
@@ -30,8 +32,6 @@ const insertUserActivity = async (identifier, direction, userId, entityIds) => {
       }
     });
   });
-
-  console.log(activityId, direction, userId, entityIds);
 
   return result;
 };
