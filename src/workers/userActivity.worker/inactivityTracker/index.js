@@ -1,19 +1,33 @@
 const { query: Hasura } = require('../../../utils/hasura');
 const insertActivity = require('../../../utils/insertUserActivity/');
 const { getLastAppOpenedTimestamp } = require('./queries/queries');
-const BATCH_SIZE = 500;
+const config = require('../../../config/config');
 
 const userInactivityTracker = async () => {
   try {
-    const getLastAppOpenedTimestampResponse = await Hasura(getLastAppOpenedTimestamp);
-    const lastAppOpenedLogs = getLastAppOpenedTimestampResponse.result.data.user_actions;
+    const { batchSize } = config;
+    let offset = 0;
+    let lastAppOpenedLogs = [];
+
     const today = new Date();
     const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0, 0);
     const todayEnd = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59, 999);
 
+    while (true) {
+      const getLastAppOpenedTimestampResponse = await Hasura(getLastAppOpenedTimestamp, { offset });
+      const batchLogs = getLastAppOpenedTimestampResponse.result.data.user_actions;
+
+      if (batchLogs.length === 0) {
+        break;
+      }
+
+      lastAppOpenedLogs = lastAppOpenedLogs.concat(batchLogs);
+      offset += 1000;
+    }
+
     const batches = [];
-    for (let i = 0; i < lastAppOpenedLogs.length; i += BATCH_SIZE) {
-      batches.push(lastAppOpenedLogs.slice(i, i + BATCH_SIZE));
+    for (let i = 0; i < lastAppOpenedLogs.length; i += batchSize) {
+      batches.push(lastAppOpenedLogs.slice(i, i + batchSize));
     }
 
     for (const batch of batches) {
