@@ -7,31 +7,22 @@ const userInactivityTracker = async () => {
   try {
     const { batchSize } = config;
     let offset = 0;
-    let lastAppOpenedLogs = [];
 
     const today = new Date();
     const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0, 0);
     const todayEnd = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59, 999);
 
     while (true) {
-      const getLastAppOpenedTimestampResponse = await Hasura(getLastAppOpenedTimestamp, { offset });
+      const getLastAppOpenedTimestampResponse = await Hasura(getLastAppOpenedTimestamp, { offset, limit: batchSize });
       const batchLogs = getLastAppOpenedTimestampResponse.result.data.user_actions;
 
       if (batchLogs.length === 0) {
         break;
       }
 
-      lastAppOpenedLogs = lastAppOpenedLogs.concat(batchLogs);
-      offset += 1000;
-    }
+      await processBatch(batchLogs, todayStart, todayEnd, today);
 
-    const batches = [];
-    for (let i = 0; i < lastAppOpenedLogs.length; i += batchSize) {
-      batches.push(lastAppOpenedLogs.slice(i, i + batchSize));
-    }
-
-    for (const batch of batches) {
-      await processBatch(batch, todayStart, todayEnd, today);
+      offset += batchSize;
     }
   } catch (error) {
     console.error('Error checking app opened and updating consecutive days:', error);
