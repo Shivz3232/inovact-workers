@@ -11,7 +11,8 @@ const envVarsSchema = Joi.object()
     HASURA_API: Joi.string().required(),
     REGION: Joi.string().default('ap-south-1'),
     ACTIVITIES_QUEUE_URL: Joi.string(),
-    CLOUD_MAP_HASURA_SERVICE_ID: Joi.string()
+    CLOUD_MAP_HASURA_SERVICE_ID: Joi.string(),
+    BATCH_SIZE: Joi.number().default(500),
   })
   .unknown();
 
@@ -28,4 +29,5 @@ module.exports = {
   region: envVars.REGION,
   activitiesQueueUrl: envVars.ACTIVITIES_QUEUE_URL,
   cloudMapHasuraServiceId: envVars.CLOUD_MAP_HASURA_SERVICE_ID,
+  batchSize: envVars.BATCH_SIZE,
 };
