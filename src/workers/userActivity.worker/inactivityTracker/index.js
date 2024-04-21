@@ -20,7 +20,7 @@ const userInactivityTracker = async () => {
         break;
       }
 
-      await processBatch(batchLogs, todayStart, todayEnd, today);
+      processBatch(batchLogs, todayStart, todayEnd, today);
 
       offset += batchSize;
     }
