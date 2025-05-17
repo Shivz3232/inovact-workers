@@ -1,4 +1,4 @@
 require("./inactivityTracker")
 // require("./test")
-require("./jobsClosingInOneDayNotifier")
-require("./jobsClosingInThreeDaysNotifier")
+// require("./jobsClosingInOneDayNotifier")
+// require("./jobsClosingInThreeDaysNotifier")
