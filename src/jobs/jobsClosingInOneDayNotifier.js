@@ -3,8 +3,7 @@ const logger = require('../config/logger');
 const { oneDayToDeadlineReminder } = require('../workers/applications.worker/oneDayToDeadlineReminder');
 
 const jobsClosingInOneDayNotifier = cron.schedule(
-  // '0 23 * * *',
-  '* * * * *',
+  '0 23 * * *',
   () => {
     logger.info('Running jobs closing in one day notifier cron job...');
     oneDayToDeadlineReminder();
@@ -15,7 +14,7 @@ const jobsClosingInOneDayNotifier = cron.schedule(
 );
 
 jobsClosingInOneDayNotifier.on('error', (err) => {
-  logger.error('Error in jobs closing in one day notifier cron job:', err);
+  console.error('Error in jobs closing in one day notifier cron job:', err);
 });
 
 module.exports = jobsClosingInOneDayNotifier;
