@@ -15,7 +15,7 @@ const threeDaysToDeadlineReminder = async () => {
       return application.applicant.user.cognito_sub;
     });
 
-    enqueueEmailNotification(19, job.id, null, applicationIds)
+    enqueueEmailNotification(20, job.id, null, applicationIds)
   })
 }
 

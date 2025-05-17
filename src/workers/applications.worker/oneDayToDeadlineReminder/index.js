@@ -15,7 +15,7 @@ const oneDayToDeadlineReminder = async () => {
       return application.applicant.user.cognito_sub;
     });
 
-    enqueueEmailNotification(18, job.id, null, applicationIds)
+    enqueueEmailNotification(19, job.id, null, applicationIds)
   })
 }
 
