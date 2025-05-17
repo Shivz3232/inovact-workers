@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
 
 const config = require('../config/config');
-const getActivityId = require('./getActivityId');
+// const getActivityId = require('./getActivityId');
 
 const sqs = new AWS.SQS({
   region: config.region,
