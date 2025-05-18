@@ -17,6 +17,7 @@ const threeDaysToDeadlineReminder = async () => {
       });
 
       enqueueEmailNotification(20, job.id, null, applicationIds);
+      notify(34, job.id, null, applicationIds);
     }); 
   } catch (error) {
     console.error('Error notifying applications with 3 days pending', error);
