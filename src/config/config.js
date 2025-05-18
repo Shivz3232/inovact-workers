@@ -13,6 +13,8 @@ const envVarsSchema = Joi.object()
     ACTIVITIES_QUEUE_URL: Joi.string(),
     CLOUD_MAP_HASURA_SERVICE_ID: Joi.string(),
     BATCH_SIZE: Joi.number().default(500),
+    NOTIFY_QUEUE_URL: Joi.string().required(),
+    EMAIL_QUEUE_URL: Joi.string().required(),
   })
   .unknown();
 
@@ -30,4 +32,6 @@ module.exports = {
   activitiesQueueUrl: envVars.ACTIVITIES_QUEUE_URL,
   cloudMapHasuraServiceId: envVars.CLOUD_MAP_HASURA_SERVICE_ID,
   batchSize: envVars.BATCH_SIZE,
+  notifyQueueUrl: envVars.NOTIFY_QUEUE_URL,
+  emailQueueUrl: envVars.EMAIL_QUEUE_URL,
 };
