@@ -10,6 +10,9 @@ const fetchJobsWithinDeadlineQuery = `query FetchJobsWithinDeadline($timestamp: 
           cognito_sub
         }
       }
+      assignment_file{
+        id
+      }
     }
   }
 }`;
